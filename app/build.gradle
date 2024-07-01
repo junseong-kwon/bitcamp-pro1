@@ -34,10 +34,13 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.example.App'
+    mainClass = 'bitcamp.project2.App'
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+run {
+    standardInput = System.in // 기본 값은 empty stream 이다.
 }
