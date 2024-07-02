@@ -5,7 +5,6 @@ import bitcamp.project2.vo.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TodayTodoCommand {
     ArrayList<Todo> todoList = new ArrayList<Todo>();
@@ -15,6 +14,8 @@ public class TodayTodoCommand {
     //    public TodayTodoCommand(ArrayList<Todo> todoList){
 //        this.todoList = todoList;
 //    }
+
+    // 테스트 더미데이터
     public void testData() {
         Todo todo = new Todo();
         todo.setNo(Todo.getSeqNo());
@@ -24,17 +25,19 @@ public class TodayTodoCommand {
 
         Todo todo1 = new Todo();
         todo1.setNo(Todo.getSeqNo());
-        todo1.setDate(LocalDate.parse("2024-11-15"));
+        todo1.setDate(LocalDate.parse("2024-07-02"));
         todo1.setTitle("과거");
         todoList.add(todo1);
 
         Todo todo2 = new Todo();
-        todo2.setNo(Todo.getSeqNo());
+        todo2.setNo(11);
         todo2.setDate(LocalDate.parse("2024-07-02"));
         todo2.setTitle("오늘입니다");
+        todo2.setComplete(true);
         todoList.add(todo2);
     }
 
+    // 할 일 리스트 중 오늘 할 일 분류
     private void setTodayTodoList() {
         for (Todo todo : todoList) {
             if (todo.getDate().equals(LocalDate.now())) {
@@ -43,14 +46,44 @@ public class TodayTodoCommand {
         }
     }
 
+    // 오늘 할 일 프린트
     private void todoListPrint() {
-        System.out.printf("[%s]\n", LocalDate.now());
-        System.out.println("번호 내용");
+        String line2 = "======================================================";
+        String ansiRed = "\u001B[31m";
+        String ansiEnd = "\u001B[0m";
+
+        System.out.printf("=====================[%s]=====================\n", LocalDate.now());
         for (Todo todayTodo : todayTodoList) {
-            System.out.printf("%d. %s\n", todayTodo.getNo(), todayTodo.getTitle());
+            System.out.print("|");
+            System.out.printf("%3d | ", todayTodo.getNo());
+            System.out.printf("%s", todayTodo.isComplete() ? String.format("%s⬤%s | ", ansiRed,ansiEnd) : "⬤ | ");
+            printSort(todayTodo.getTitle());
         }
+        System.out.println(line2);
     }
 
+    private void printSort(String title){
+        final int TITLE_MAX = 20;
+        int eng = 0;
+        System.out.print(title);
+        for(char titleChar : title.toCharArray()){
+            if(titleChar >= 0xAC00 && titleChar <= 0xD7A3){
+                continue;
+            }else {
+                eng++;
+            }
+        }
+        for(int i = 0; i < TITLE_MAX - title.length(); i++){
+            System.out.print("  ");
+        }
+        for(int i = 0; i < eng; i++){
+            System.out.print(" ");
+        }
+        System.out.print("|");
+        System.out.println();
+    }
+
+    // 오늘 할 일 메뉴 프린트
     private void printTodayTodoMenus(){
         int menuNo = 1;
         System.out.println("[오늘 할 일]");
@@ -59,6 +92,7 @@ public class TodayTodoCommand {
         }
     }
 
+    // 오늘 할 일 시작 부분
     public void executeToday() {
         setTodayTodoList();
         printTodayTodoMenus();
@@ -97,6 +131,7 @@ public class TodayTodoCommand {
         }
     }
 
+    // 오늘 할 일 수정 코드
     private void todayListUpdate() {
         String input;
         int number;
@@ -123,6 +158,7 @@ public class TodayTodoCommand {
         }
     }
 
+    // 오늘 할 일 삭제 코드
     private void todayListDelete() {
         String input;
         int number;
@@ -155,6 +191,7 @@ public class TodayTodoCommand {
         }
     }
 
+    // 오늘 할 일 완료 코드
     private void todayComplete(){
         String input;
         int number;
@@ -179,6 +216,7 @@ public class TodayTodoCommand {
         }
     }
 
+    // 완료 했는지 여부 확인
     private void isComplete(Todo todo){
         while (true) {
             String complete = Prompt.input("완료 여부를 입력해주세요.");
@@ -194,6 +232,7 @@ public class TodayTodoCommand {
         }
     }
 
+    // 고른 할 일이 있는지 여부 확인
     private Todo nullTodo(int number) {
         for (Todo todo : todayTodoList) {
             if (todo.getNo() == number) {
