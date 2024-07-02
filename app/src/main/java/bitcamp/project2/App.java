@@ -10,14 +10,11 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import org.w3c.dom.ls.LSOutput;
-
 
 public class App {
 
     Scanner scanner = new Scanner(System.in);
     List<Task> tasks = new ArrayList<>();
-
 
     public void run() {
         while (true) {
@@ -32,10 +29,10 @@ public class App {
                     viewTasks();
                     break;
                 case 3:
-
+                    // 기능 넣기
                     break;
                 case 4:
-                    //기능 넣기
+                    updateTask();
                     break;
                 case 5:
                     deleteTask();
@@ -50,9 +47,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-//      TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
-//      todayTodoCommand.testData();
-//      todayTodoCommand.executeToday();
+        // TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
+        // todayTodoCommand.testData();
+        // todayTodoCommand.executeToday();
 
         App app = new App();
         app.run();
@@ -138,6 +135,7 @@ public class App {
             }
         }
     }
+
     public void deleteTask() {
         if (tasks.isEmpty()) {
             System.out.println("삭제할 할 일이 없습니다.");
@@ -162,5 +160,29 @@ public class App {
             System.out.println("해당 번호의 할 일을 찾을 수 없습니다.");
         }
     }
+    public void updateTask() {
+        if (tasks.isEmpty()) {
+            System.out.println("수정할 할 일이 없습니다.");
+            return;
+        }
 
+        viewTasks(); // 번호와 함께 목록을 출력
+        int taskNo = getIntInput("수정할 할 일 번호를 입력하세요: ") - 1; // 입력된 번호를 인덱스로 변환
+        if (taskNo < 0 || taskNo >= tasks.size()) {
+            System.out.println("해당 번호의 할 일을 찾을 수 없습니다.");
+            return;
+        }
+
+        Task task = tasks.get(taskNo);
+        consumeNewLine();
+        String newTitle = getStringInput("새 할 일을 입력하세요: ");
+        LocalDate newDate = getDateInput("새 날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
+        boolean newCompleted = getBooleanInput("완료했습니까?(y/n): ");
+
+        task.setTitle(newTitle);
+        task.setDate(newDate);
+        task.setCompleted(newCompleted);
+
+        System.out.println("할 일이 수정되었습니다.");
+    }
 }
