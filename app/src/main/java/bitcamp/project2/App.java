@@ -50,7 +50,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-//      TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
+//      TodayTodoCommand = new TodayTodoCommand();
 //      todayTodoCommand.testData();
 //      todayTodoCommand.executeToday();
 

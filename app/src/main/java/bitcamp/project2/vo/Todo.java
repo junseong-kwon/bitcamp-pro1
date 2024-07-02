@@ -6,7 +6,8 @@ public class Todo {
     private static int seqNo;
     private int no;
     private String title;
-    private LocalDate date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private boolean complete;
 
     public static int getSeqNo() {
@@ -27,12 +28,20 @@ public class Todo {
 
     public void setTitle(String title) { this.title = title; }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public boolean isComplete() {

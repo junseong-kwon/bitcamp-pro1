@@ -11,19 +11,19 @@ public class TodoList {
     public void testData() {
         Todo todo = new Todo();
         todo.setNo(Todo.getSeqNo());
-        todo.setDate(LocalDate.parse("2024-11-12"));
+        todo.setStartDate(LocalDate.parse("2024-11-12"));
         todo.setTitle("테스트");
         todoList.add(todo);
 
         Todo todo1 = new Todo();
         todo1.setNo(Todo.getSeqNo());
-        todo1.setDate(LocalDate.parse("2024-07-02"));
+        todo1.setStartDate(LocalDate.parse("2024-07-02"));
         todo1.setTitle("과거");
         todoList.add(todo1);
 
         Todo todo2 = new Todo();
         todo2.setNo(11);
-        todo2.setDate(LocalDate.parse("2024-07-02"));
+        todo2.setStartDate(LocalDate.parse("2024-07-02"));
         todo2.setTitle("오늘입니다");
         todo2.setComplete(true);
         todoList.add(todo2);
@@ -40,7 +40,7 @@ public class TodoList {
         }
 
         for (Todo todo : todoList) {
-            if (todo.getDate().equals(LocalDate.now())) {
+            if (todo.getStartDate().equals(LocalDate.now())) {
                 todayList.add(todo);
             }
         }

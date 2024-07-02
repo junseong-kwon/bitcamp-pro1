@@ -84,7 +84,7 @@ public class TodayTodoCommand {
                     System.out.println("없는 할 일입니다.");
                     break;
                 }
-                updateTodo.setDate(Prompt.inputDate("수정할 날짜 입력(ex. 0000-00-00) >"));
+                updateTodo.setStartDate(Prompt.inputDate("수정할 날짜 입력(ex. 0000-00-00) >"));
                 updateTodo.setTitle(Prompt.input("수정할 타이틀 입력 >"));
                 isComplete(updateTodo);
                 break;
