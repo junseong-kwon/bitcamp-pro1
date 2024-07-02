@@ -3,12 +3,12 @@
  */
 package bitcamp.project2;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import bitcamp.project2.command.TodayTodoCommand;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
+        todayTodoCommand.testData();
+        todayTodoCommand.executeToday();
     }
 }
