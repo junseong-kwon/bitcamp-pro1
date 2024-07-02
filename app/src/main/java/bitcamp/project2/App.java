@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import org.w3c.dom.ls.LSOutput;
+
 
 public class App {
 
     Scanner scanner = new Scanner(System.in);
     List<Task> tasks = new ArrayList<>();
+
 
     public void run() {
         while (true) {
@@ -47,9 +50,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-        // TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
-        // todayTodoCommand.testData();
-        // todayTodoCommand.executeToday();
+//      TodayTodoCommand = new TodayTodoCommand();
+//      todayTodoCommand.testData();
+//      todayTodoCommand.executeToday();
 
         App app = new App();
         app.run();
