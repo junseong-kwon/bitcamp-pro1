@@ -51,7 +51,7 @@ public class App {
 
     public static void main(String[] args) {
       TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
-      todayTodoCommand.testData();
+//      todayTodoCommand.testData();
       todayTodoCommand.executeToday();
 
         App app = new App();
