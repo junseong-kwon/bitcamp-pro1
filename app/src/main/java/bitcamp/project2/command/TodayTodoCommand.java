@@ -73,7 +73,7 @@ public class TodayTodoCommand {
             }
             try {
                 number = Integer.parseInt(input);
-                if (number < 0 || number >= menus.length) {
+                if (number < 0 || number > menus.length) {
                     System.out.println("올바른 메뉴 번호를 입력해주세요.");
                 } else {
                     String menu = menus[number - 1];
@@ -82,6 +82,7 @@ public class TodayTodoCommand {
                             todayListUpdate();
                             break;
                         case "할 일 삭제":
+                            todayListDelete();
                             break;
                         case "할 일 완료":
                             break;
@@ -112,6 +113,39 @@ public class TodayTodoCommand {
                 updateTodo.setDate(Prompt.inputDate("수정할 날짜를 입력해주세요.(ex 20240101)"));
                 updateTodo.setTitle(Prompt.input("수정할 타이틀을 입력해주세요."));
                 isComplete(updateTodo);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("번호로 입력해주세요.");
+            }
+        }
+    }
+
+    private void todayListDelete() {
+        String input;
+        int number;
+        while (true) {
+            input = Prompt.input("삭제하길 원하는 할 일 번호를 입력해주세요.");
+            try {
+                number = Integer.parseInt(input);
+                if (number < 0) {
+                    System.out.println("없는 번호입니다.");
+                    break;
+                }
+                Todo deleteTodo = nullTodo(number);
+                if (deleteTodo == null) {
+                    System.out.println("없는 할 일입니다.");
+                    break;
+                }
+                for(int i = 0; i < todayTodoList.size(); i++){
+                    if(todayTodoList.get(i).equals(deleteTodo)){
+                        todayTodoList.remove(i);
+                    }
+                    if(todoList.get(i).equals(deleteTodo)){
+                        todoList.remove(i);
+                    }
+                }
+                System.out.println("삭제했습니다");
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("번호로 입력해주세요.");
             }
