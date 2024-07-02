@@ -5,6 +5,7 @@ import bitcamp.project2.vo.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TodayTodoCommand {
     ArrayList<Todo> todoList = new ArrayList<Todo>();
@@ -43,14 +44,16 @@ public class TodayTodoCommand {
     }
 
     private void todoListPrint() {
-        System.out.println("번호  날짜  내용");
+        System.out.printf("[%s]\n", LocalDate.now());
+        System.out.println("번호 내용");
         for (Todo todayTodo : todayTodoList) {
-            System.out.printf("%s %s %s\n", todayTodo.getNo(), todayTodo.getDate(), todayTodo.getTitle());
+            System.out.printf("%d. %s\n", todayTodo.getNo(), todayTodo.getTitle());
         }
     }
 
     private void printTodayTodoMenus(){
         int menuNo = 1;
+        System.out.println("[오늘 할 일]");
         for(String menu : menus){
             System.out.printf("%d. %s\n", menuNo++, menu);
         }
@@ -58,12 +61,11 @@ public class TodayTodoCommand {
 
     public void executeToday() {
         setTodayTodoList();
-        todoListPrint();
         printTodayTodoMenus();
         int number;
         String input;
         while (true) {
-            input = Prompt.input("원하는 메뉴를 입력해주세요.");
+            input = Prompt.input("메뉴 번호 입력 >");
             if (input.equals("9")) {
                 break;
             }else if(input.equalsIgnoreCase("menu")){
@@ -85,6 +87,7 @@ public class TodayTodoCommand {
                             todayListDelete();
                             break;
                         case "할 일 완료":
+                            todayComplete();
                             break;
                     }
                 }
@@ -98,7 +101,7 @@ public class TodayTodoCommand {
         String input;
         int number;
         while (true) {
-            input = Prompt.input("수정하길 원하는 할 일 번호를 입력해주세요.");
+            input = Prompt.input("수정 할 일 번호 >");
             try {
                 number = Integer.parseInt(input);
                 if (number < 0) {
@@ -145,6 +148,30 @@ public class TodayTodoCommand {
                     }
                 }
                 System.out.println("삭제했습니다");
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("번호로 입력해주세요.");
+            }
+        }
+    }
+
+    private void todayComplete(){
+        String input;
+        int number;
+        while (true) {
+            input = Prompt.input("완료한 할 일 번호를 입력해주세요.");
+            try {
+                number = Integer.parseInt(input);
+                if (number < 0) {
+                    System.out.println("없는 번호입니다.");
+                    break;
+                }
+                Todo updateTodo = nullTodo(number);
+                if (updateTodo == null) {
+                    System.out.println("없는 할 일입니다.");
+                    break;
+                }
+                isComplete(updateTodo);
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("번호로 입력해주세요.");
