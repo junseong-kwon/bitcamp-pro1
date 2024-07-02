@@ -10,7 +10,7 @@ public class Todo {
     private boolean complete;
 
     public static int getSeqNo() {
-        return seqNo++;
+        return ++seqNo;
     }
 
     public int getNo() {
