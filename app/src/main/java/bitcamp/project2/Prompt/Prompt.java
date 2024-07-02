@@ -29,8 +29,21 @@ public class Prompt {
     }
   }
 
-
   public static void close() {
     keyboardScanner.close();
+  }
+
+  public static LocalDate parseDate(String dateString) {
+    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMdd");
+    try {
+      if (dateString.contains("-")) {
+        return LocalDate.parse(dateString, formatter1);
+      } else {
+        return LocalDate.parse(dateString, formatter2);
+      }
+    } catch (DateTimeParseException e) {
+      throw new DateTimeParseException("날짜 형식을 입력해주세요 (yyyy-MM-dd 또는 yyyyMMdd).", dateString, 0);
+    }
   }
 }
