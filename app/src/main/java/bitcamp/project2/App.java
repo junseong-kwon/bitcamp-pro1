@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Scanner;
 import org.w3c.dom.ls.LSOutput;
 
-import bitcamp.project2.command.TodayTodoCommand;
 
 public class App {
 
     Scanner scanner = new Scanner(System.in);
     List<Task> tasks = new ArrayList<>();
+
 
     public void run() {
         while (true) {
@@ -32,13 +32,13 @@ public class App {
                     viewTasks();
                     break;
                 case 3:
-                    //기능 넣기
+
                     break;
                 case 4:
                     //기능 넣기
                     break;
                 case 5:
-                    //기능 넣기
+                    deleteTask();
                     break;
                 case 0:
                     System.out.println("종료");
@@ -50,9 +50,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-      TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
+//      TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
 //      todayTodoCommand.testData();
-      todayTodoCommand.executeToday();
+//      todayTodoCommand.executeToday();
 
         App app = new App();
         app.run();
@@ -137,7 +137,30 @@ public class App {
                 System.out.println("잘못된 입력입니다. 'y' 또는 'n'을 입력해주세요.");
             }
         }
-
-
     }
+    public void deleteTask() {
+        if (tasks.isEmpty()) {
+            System.out.println("삭제할 할 일이 없습니다.");
+            return;
+        }
+
+        viewTasks();
+        int taskNo = getIntInput("삭제할 할 일 번호를 입력하세요: ");
+        boolean found = false;
+
+        // 일반 for 문을 사용하여 리스트를 순회
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getNo() == taskNo) {
+                tasks.remove(i);
+                System.out.println("할 일이 삭제되었습니다.");
+                found = true;
+                break;  // 요소를 제거한 후 루프를 종료
+            }
+        }
+
+        if (!found) {
+            System.out.println("해당 번호의 할 일을 찾을 수 없습니다.");
+        }
+    }
+
 }
