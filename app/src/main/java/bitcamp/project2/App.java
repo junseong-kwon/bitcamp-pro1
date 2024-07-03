@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import org.w3c.dom.ls.LSOutput;
+
+import bitcamp.project2.command.TodayTodoCommand;
 
 
 public class App {
@@ -50,9 +51,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-//      TodayTodoCommand = new TodayTodoCommand();
-//      todayTodoCommand.testData();
-//      todayTodoCommand.executeToday();
+        new TodayTodoCommand().executeToday();
 
         App app = new App();
         app.run();

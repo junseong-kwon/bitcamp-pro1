@@ -3,9 +3,8 @@ package bitcamp.project2.vo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TodoListCommand {
+public class TodoList {
     private final ArrayList<Todo> todoList = new ArrayList<>();
-//    private final
 
     public void testData() {
         Todo todo = new Todo();
@@ -23,15 +22,39 @@ public class TodoListCommand {
         todoList.add(todo1);
 
         Todo todo2 = new Todo();
-        todo2.setNo(11);
+        todo2.setNo(Todo.getSeqNo());
         todo2.setStartDate(LocalDate.parse("2024-07-02"));
         todo.setEndDate(LocalDate.parse("2024-11-12"));
         todo2.setTitle("오늘입니다");
         todo2.setComplete(true);
         todoList.add(todo2);
+
+        Todo todo3 = new Todo();
+        todo3.setNo(Todo.getSeqNo());
+        todo3.setStartDate(LocalDate.parse("2024-07-02"));
+        todo.setEndDate(LocalDate.parse("2024-11-12"));
+        todo3.setTitle("오늘입니다");
+        todo3.setComplete(true);
+        todoList.add(todo3);
+
+        Todo todo4 = new Todo();
+        todo4.setNo(Todo.getSeqNo());
+        todo4.setStartDate(LocalDate.parse("2024-07-02"));
+        todo.setEndDate(LocalDate.parse("2024-11-12"));
+        todo4.setTitle("오늘입니다");
+        todo4.setComplete(true);
+        todoList.add(todo4);
+
+        Todo todo5 = new Todo();
+        todo5.setNo(Todo.getSeqNo());
+        todo5.setStartDate(LocalDate.parse("2024-07-02"));
+        todo.setEndDate(LocalDate.parse("2024-11-12"));
+        todo5.setTitle("오늘입니다");
+        todo5.setComplete(true);
+        todoList.add(todo5);
     }
 
-    public TodoListCommand(){
+    public TodoList(){
         testData();
     }
 

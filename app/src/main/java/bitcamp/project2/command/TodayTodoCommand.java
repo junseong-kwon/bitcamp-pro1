@@ -1,5 +1,6 @@
 package bitcamp.project2.command;
 
+import bitcamp.project2.PROCESS;
 import bitcamp.project2.Prompt.PrintTodoList;
 import bitcamp.project2.Prompt.Prompt;
 import bitcamp.project2.vo.Todo;
@@ -8,11 +9,13 @@ import bitcamp.project2.vo.TodoList;
 import java.util.ArrayList;
 
 public class TodayTodoCommand {
-    TodoList todoList = new TodoList();
-    ArrayList<Todo> todayList = todoList.setTodayTodoList();
-    ArrayList<Todo> todoAllList = todoList.getTodoList();
+    private TodoList todoList = new TodoList();
+    private ArrayList<Todo> todayList = todoList.setTodayTodoList();
+    private final ArrayList<Todo> todoAllList = todoList.getTodoList();
+
+    private final String[] menus = {"오늘 할 일 보기", "할 일 수정", "할 일 삭제", "할 일 완료"};
+
     PrintTodoList printTodoList = new PrintTodoList();
-    String[] menus = {"오늘 할 일 보기", "할 일 수정", "할 일 삭제", "할 일 완료"};
 
 //    public TodayTodoCommand(ArrayList<Todo> todoList) {
 //        this.todoList = todoList;
@@ -41,15 +44,15 @@ public class TodayTodoCommand {
             } else if (input.equalsIgnoreCase("menu")) {
                 printTodayTodoMenus();
             } else if (input.equals("1")) {
-                printTodoList.printTodoList(todoList.getTodayList());
+                printTodoList.printTodoList(PROCESS.TODAY, todayList);
             }
             try {
                 number = Integer.parseInt(input);
-                if (number < 0 || number > menus.length) {
+                if (isAvailable(number)) {
                     System.out.println("올바른 메뉴 번호를 입력해주세요.");
                 } else {
-                    String menu = menus[number - 1];
-                    switch (menu) {
+                    String menuTitle = menuNo(number);
+                    switch (menuTitle) {
                         case "할 일 수정":
                             todayListUpdate();
                             break;
@@ -87,6 +90,7 @@ public class TodayTodoCommand {
                 updateTodo.setStartDate(Prompt.inputDate("수정할 날짜 입력(ex. 0000-00-00) >"));
                 updateTodo.setTitle(Prompt.input("수정할 타이틀 입력 >"));
                 isComplete(updateTodo);
+                todayList = todoList.setTodayTodoList();
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("번호로 입력해주세요.");
@@ -113,14 +117,12 @@ public class TodayTodoCommand {
                     break;
                 }
 
-                for (int i = 0; i < todoList.getTodayList().size(); i++) {
-                    if (todayList.get(i).equals(deleteTodo)) {
-                        todayList.remove(i);
-                    }
+                for (int i = 0; i < todayList.size(); i++) {
                     if (todoAllList.get(i).equals(deleteTodo)) {
                         todoAllList.remove(i);
                     }
                 }
+                todayList = todoList.setTodayTodoList();
                 System.out.println("삭제했습니다");
                 break;
             } catch (NumberFormatException e) {
@@ -168,5 +170,13 @@ public class TodayTodoCommand {
                 System.out.println("y 나 n만 입력해주세요.");
             }
         }
+    }
+
+    private boolean isAvailable(int number){
+        return number < 0 || number > menus.length;
+    }
+
+    private String menuNo(int number){
+        return menus[number - 1];
     }
 }
