@@ -30,7 +30,7 @@ public class App {
                     toDo();
                     break;
                 case 2:
-                    viewTasks();
+                    viewTasks(false, false); // 조회에서는 번호 없이 출력
                     break;
                 case 3:
                     // 기능 넣기
@@ -51,7 +51,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-        new TodayTodoCommand().executeToday();
+//      TodayTodoCommand = new TodayTodoCommand();
+//      todayTodoCommand.testData();
+//      todayTodoCommand.executeToday();
 
         App app = new App();
         app.run();
@@ -79,21 +81,30 @@ public class App {
     }
 
     public void toDo() {
-        scanner.nextLine();
+        scanner.nextLine(); // Consume the newline
         String list = getStringInput("할 일을 입력하세요: ");
         boolean completed = getBooleanInput("완료했습니까?(y/n): ");
         LocalDate date = getDateInput("날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
-        tasks.add(new Task(list, date, completed));
+        LocalDate endDate = getDateInput("날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
+        tasks.add(new Task(list, date,completed));
         System.out.println("할 일을 추가했습니다.");
     }
 
-    public void viewTasks() {
+    public void viewTasks(boolean showNumbers, boolean view) {
         if (tasks.isEmpty()) {
             System.out.println("등록된 할 일이 없습니다.");
         } else {
-            System.out.println("완료   할 일       날짜");
-            for (Task task : tasks) {
-                System.out.println(task);
+            if (view) {
+                System.out.println("no. 완료   할 일       날짜");
+            } else {
+                System.out.println("완료   할 일       날짜");
+            }
+            for (int i = 0; i < tasks.size(); i++) {
+                if (showNumbers) {
+                    System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+                } else {
+                    System.out.println(tasks.get(i));
+                }
             }
         }
     }
@@ -144,17 +155,16 @@ public class App {
             return;
         }
 
-        viewTasks();
+        viewTasks(true, true); // 삭제에서는 번호와 함께 출력
         int taskNo = getIntInput("삭제할 할 일 번호를 입력하세요: ");
         boolean found = false;
 
-        // 일반 for 문을 사용하여 리스트를 순회
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getNo() == taskNo) {
+            if (i == taskNo - 1) { // 번호를 인덱스로 변환하여 삭제
                 tasks.remove(i);
                 System.out.println("할 일이 삭제되었습니다.");
                 found = true;
-                break;  // 요소를 제거한 후 루프를 종료
+                break; // 요소를 제거한 후 루프를 종료
             }
         }
 
@@ -162,13 +172,14 @@ public class App {
             System.out.println("해당 번호의 할 일을 찾을 수 없습니다.");
         }
     }
+
     public void updateTask() {
         if (tasks.isEmpty()) {
             System.out.println("수정할 할 일이 없습니다.");
             return;
         }
 
-        viewTasks(); // 번호와 함께 목록을 출력
+        viewTasks(true, true); // 수정에서는 번호와 함께 출력
         int taskNo = getIntInput("수정할 할 일 번호를 입력하세요: ") - 1; // 입력된 번호를 인덱스로 변환
         if (taskNo < 0 || taskNo >= tasks.size()) {
             System.out.println("해당 번호의 할 일을 찾을 수 없습니다.");
@@ -176,9 +187,10 @@ public class App {
         }
 
         Task task = tasks.get(taskNo);
-        consumeNewLine();
+        scanner.nextLine(); // Consume the newline left-over
         String newTitle = getStringInput("새 할 일을 입력하세요: ");
         LocalDate newDate = getDateInput("새 날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
+        LocalDate endDate = getDateInput("새 날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
         boolean newCompleted = getBooleanInput("완료했습니까?(y/n): ");
 
         task.setTitle(newTitle);
