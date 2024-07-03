@@ -7,51 +7,11 @@ public class TodoList {
     private final ArrayList<Todo> todoList = new ArrayList<>();
 
     public void testData() {
-        Todo todo = new Todo();
-        todo.setNo(Todo.getSeqNo());
-        todo.setStartDate(LocalDate.parse("2024-07-02"));
-        todo.setEndDate(LocalDate.parse("2024-07-12"));
-        todo.setTitle("정상");
-        todoList.add(todo);
-
-        Todo todo1 = new Todo();
-        todo1.setNo(Todo.getSeqNo());
-        todo1.setStartDate(LocalDate.parse("2024-07-04"));
-        todo1.setEndDate(LocalDate.parse("2024-11-11"));
-        todo1.setTitle("7-4");
-        todoList.add(todo1);
-
-        Todo todo2 = new Todo();
-        todo2.setNo(Todo.getSeqNo());
-        todo2.setStartDate(LocalDate.parse("2024-07-03"));
-        todo2.setEndDate(LocalDate.parse("2024-07-03"));
-        todo2.setTitle("오늘입니다");
-        todo2.setComplete(true);
-        todoList.add(todo2);
-
-        Todo todo3 = new Todo();
-        todo3.setNo(Todo.getSeqNo());
-        todo3.setStartDate(LocalDate.parse("2024-07-02"));
-        todo3.setEndDate(LocalDate.parse("2024-07-03"));
-        todo3.setTitle("종료");
-        todo3.setComplete(true);
-        todoList.add(todo3);
-
-        Todo todo4 = new Todo();
-        todo4.setNo(Todo.getSeqNo());
-        todo4.setStartDate(LocalDate.parse("2024-07-02"));
-        todo4.setEndDate(LocalDate.parse("2024-11-12"));
-        todo4.setTitle("testData");
-        todo4.setComplete(true);
-        todoList.add(todo4);
-
-        Todo todo5 = new Todo();
-        todo5.setNo(Todo.getSeqNo());
-        todo5.setStartDate(LocalDate.parse("2024-07-02"));
-        todo5.setEndDate(LocalDate.parse("2024-11-12"));
-        todo5.setTitle("할 일 입력");
-        todo5.setComplete(true);
-        todoList.add(todo5);
+        todoList.add(new Todo("오늘", LocalDate.parse("2024-07-03"), LocalDate.parse("2024-07-03")));
+        todoList.add(new Todo("어제", LocalDate.parse("2024-07-02"), LocalDate.parse("2024-07-02")));
+        todoList.add(new Todo("ing", LocalDate.parse("2024-07-01"), LocalDate.parse("2024-07-11")));
+        todoList.add(new Todo("내일", LocalDate.parse("2024-07-04"), LocalDate.parse("2024-07-11")));
+        todoList.add(new Todo("테스트", LocalDate.parse("2024-07-02"), LocalDate.parse("2024-07-02")));
     }
 
     public TodoList(){

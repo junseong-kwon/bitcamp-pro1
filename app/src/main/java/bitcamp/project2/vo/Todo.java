@@ -10,8 +10,15 @@ public class Todo {
     private LocalDate endDate;
     private boolean complete;
 
+    public Todo(String title, LocalDate startDate, LocalDate endDate){
+        no = ++seqNo;
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public static int getSeqNo() {
-        return ++seqNo;
+        return seqNo;
     }
 
     public int getNo() {

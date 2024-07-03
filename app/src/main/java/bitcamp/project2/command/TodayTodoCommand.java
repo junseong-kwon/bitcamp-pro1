@@ -9,17 +9,17 @@ import bitcamp.project2.vo.TodoList;
 import java.util.ArrayList;
 
 public class TodayTodoCommand {
-    private TodoList todoList = new TodoList();
-    private ArrayList<Todo> todayList = todoList.setTodayTodoList();
+    private TodoList todoList;
     private final ArrayList<Todo> todoAllList = todoList.getTodoList();
+    private ArrayList<Todo> todayList = todoList.setTodayTodoList();
 
     private final String[] menus = {"오늘 할 일 보기", "할 일 수정", "할 일 삭제", "할 일 완료"};
 
     PrintTodoList printTodoList = new PrintTodoList();
 
-//    public TodayTodoCommand(ArrayList<Todo> todoList) {
-//        this.todoList = todoList;
-//    }
+    public TodayTodoCommand(TodoList todoList) {
+        this.todoList = todoList;
+    }
 
     // 오늘 할 일 메뉴 프린트
     private void printTodayTodoMenus() {
@@ -44,7 +44,7 @@ public class TodayTodoCommand {
             } else if (input.equalsIgnoreCase("menu")) {
                 printTodayTodoMenus();
             } else if (input.equals("1")) {
-                printTodoList.printTodoList(PROCESS.TODAY, todayList);
+                printTodoList.printTodoList(PROCESS.DEFAULT, todayList);
             }
             try {
                 number = Integer.parseInt(input);
