@@ -19,7 +19,6 @@ public class App {
     Scanner scanner = new Scanner(System.in);
     List<Task> tasks = new ArrayList<>();
 
-
     public void run() {
         while (true) {
             printMenu();
@@ -51,9 +50,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-//      TodayTodoCommand = new TodayTodoCommand();
-//      todayTodoCommand.testData();
-//      todayTodoCommand.executeToday();
+      new TodayTodoCommand().executeToday();
 
         App app = new App();
         app.run();
@@ -86,7 +83,7 @@ public class App {
         boolean completed = getBooleanInput("완료했습니까?(y/n): ");
         LocalDate date = getDateInput("날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
         LocalDate endDate = getDateInput("날짜를 입력하세요(yyyy-MM-dd 또는 yyyyMMdd): ");
-        tasks.add(new Task(list, date,completed));
+        tasks.add(new Task(list, date, completed));
         System.out.println("할 일을 추가했습니다.");
     }
 
