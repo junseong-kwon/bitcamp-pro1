@@ -9,9 +9,9 @@ import bitcamp.project2.command.TodoCommand;
 import bitcamp.project2.vo.TodoList;
 
 public class App {
-    TodoList todoList = new TodoList();
-    TodoCommand todoCommand = new TodoCommand(todoList);
-    TodayTodoCommand todayTodoCommand = new TodayTodoCommand(todoList);
+//    TodoList todoList = new TodoList();
+    TodoCommand todoCommand = new TodoCommand();
+    TodayTodoCommand todayTodoCommand = new TodayTodoCommand();
     String[] menus = {"해야할 일 추가", "목록 조회", "오늘 해야 할 일", "수정","삭제", "종료"};
     public void printMenu() {
         for (int i = 0; i < menus.length; i++) {
@@ -33,7 +33,6 @@ public class App {
                         break;
                     case 3:
                         todayTodoCommand.executeToday();
-
                         break;
                     case 4:
                         todoCommand.updateTask();

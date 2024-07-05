@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TodoCommand {
-  TodoList todoList;
+  TodoList todoList = new TodoList();
   ArrayList<Todo> todoArr = todoList.getTodoList();
   PrintTodoList printer = new PrintTodoList();
 
-  public TodoCommand(TodoList todoList){
-    this.todoList = todoList;
-  }
+//  public TodoCommand(TodoList todoList){
+//    this.todoList = todoList;
+//  }
 
     public void toDo() {
       String title = Prompt.input("할 일을 입력하세요: ");

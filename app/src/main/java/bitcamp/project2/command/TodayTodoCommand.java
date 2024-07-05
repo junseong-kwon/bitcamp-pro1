@@ -17,9 +17,9 @@ public class TodayTodoCommand {
 
     PrintTodoList printTodoList = new PrintTodoList();
 
-    public TodayTodoCommand(TodoList todoList) {
-        this.todoList = todoList;
-    }
+//    public TodayTodoCommand(TodoList todoList) {
+//        this.todoList = todoList;
+//    }
 
     // 오늘 할 일 메뉴 프린트
     private void printTodayTodoMenus() {
